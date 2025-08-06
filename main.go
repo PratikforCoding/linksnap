@@ -10,10 +10,7 @@ import (
 
 func main() {
 
-	err := godotenv.Load(".env")
-    if err != nil {
-        log.Fatalf("Error loading .env file: %v", err)
-    }
+	_ = godotenv.Load(".env")
 
 	// Access environment variable to confirm it's loaded
 	dbConnection := os.Getenv("DB_CONNECTION_LINK")
@@ -29,6 +26,7 @@ func main() {
 	// inittialize the router
 	r := routers.SetUpRouter()
 
+	port := os.Getenv("PORT")
 	//start the server
-	r.Run(":8080")
+	r.Run(":" + port)
 }
